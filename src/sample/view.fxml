@@ -13,7 +13,7 @@
    <children>
       <TilePane layoutX="63.0" layoutY="64.0" prefHeight="447.0" prefWidth="444.0">
          <children>
-            <Group />
+            <Group id="mapGroup" />
          </children></TilePane>
       <Slider layoutX="520.0" layoutY="64.0" orientation="VERTICAL" prefHeight="447.0" prefWidth="16.0" />
       <ListView layoutX="647.0" layoutY="64.0" prefHeight="221.0" prefWidth="221.0" />
