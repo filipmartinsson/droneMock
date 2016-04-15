@@ -18,8 +18,8 @@
          </children></TilePane>
       <Slider layoutX="520.0" layoutY="64.0" orientation="VERTICAL" prefHeight="447.0" prefWidth="16.0" />
       <TableView fx:id="posTableView" layoutX="647.0" layoutY="64.0" prefHeight="221.0" prefWidth="221.0" />
-      <Button layoutX="838.0" layoutY="291.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0" text="-" onAction="#deletePosition" />
-      <Button layoutX="797.0" layoutY="291.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="26.0" text="+" onAction="#addPosition" />
+      <Button fx:id="deleteButton" layoutX="838.0" layoutY="291.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0" text="-" onAction="#deletePosition" />
+      <Button fx:id="addButton" layoutX="797.0" layoutY="291.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="26.0" text="+" onAction="#addPosition" />
       <Button layoutX="650.0" layoutY="474.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="101.0" text="Button" />
       <Text layoutX="647.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Script" wrappingWidth="48.0" />
       <Text layoutX="647.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Position" wrappingWidth="89.0" />

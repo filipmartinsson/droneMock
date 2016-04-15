@@ -2,17 +2,20 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+
+import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.event.EventHandler;
-import javafx.scene.Cursor;
-import javafx.scene.input.MouseEvent;
+
 import java.util.ArrayList;
 
 public class Controller {
@@ -33,13 +36,19 @@ public class Controller {
     private TextField zPos;
     @FXML
     private Group mapGroup;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button addButton;
+
 
     private ArrayList<Position> positionList = new ArrayList<>();
     ObservableList<Position> listItems = FXCollections.observableArrayList ();
 
     @FXML
     public void initialize() {
-
+        deleteButton.setDisable(true);
+        addButton.setDisable(true);
 
         TableColumn col1 = new TableColumn("Order");
         TableColumn col2 = new TableColumn("X-pos");
@@ -59,6 +68,41 @@ public class Controller {
         );
         posTableView.setItems(listItems);
         posTableView.getColumns().addAll(col1, col2, col3, col4);
+        posTableView.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent arg0) {
+                deleteButton.setDisable(false);
+            }
+
+        });
+        xPos.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                System.out.println("hhhh");
+                if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0)
+                    addButton.setDisable(false);
+                else
+                    addButton.setDisable(true);
+            }
+        });
+        yPos.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0)
+                    addButton.setDisable(false);
+                else
+                    addButton.setDisable(true);
+            }
+        });
+        zPos.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0)
+                    addButton.setDisable(false);
+                else
+                    addButton.setDisable(true);
+            }
+        });
 
 
         circle_Red = new Circle(50.0f, Color.RED);
@@ -78,9 +122,13 @@ public class Controller {
     protected void addPosition() {
         System.out.println("Adding position");
         try{
-            Position p = new Position(Integer.parseInt(xPos.getText()), Integer.parseInt(yPos.getText()), Integer.parseInt(zPos.getText()), positionList.size());
-            positionList.add(p);
+            Position p = new Position(Integer.parseInt(xPos.getText()), Integer.parseInt(yPos.getText()), Integer.parseInt(zPos.getText()), listItems.size());
+            //positionList.add(p);
             listItems.add(p);
+            xPos.setText("");
+            yPos.setText("");
+            zPos.setText("");
+            addButton.setDisable(true);
         }catch (Exception e){
             //not a string
         }
@@ -88,7 +136,27 @@ public class Controller {
     }
     @FXML
     protected void deletePosition() {
-        System.out.println("Deleting position");
+        try{
+            int indexToRemove = -1;
+            for (Object p : posTableView.getSelectionModel().getSelectedItems()) {
+                indexToRemove = ((Position) p).getId();
+
+            }
+            listItems.remove(indexToRemove);
+
+            for (Position p : listItems) {
+                if(p.getId()>indexToRemove)
+                    p.setId(p.getId()-1);
+            }
+            deleteButton.setDisable(true);
+        }
+        catch (Exception e){
+            System.out.println("fucked up exception");
+        }
+
+
+
+
     }
 
 
