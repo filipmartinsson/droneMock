@@ -18,6 +18,11 @@ import java.util.ArrayList;
 public class Controller {
 
 
+    Circle circle_Red;
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
+
+
     @FXML
     private TableView posTableView;
     @FXML
@@ -56,13 +61,14 @@ public class Controller {
         posTableView.getColumns().addAll(col1, col2, col3, col4);
 
 
+        circle_Red = new Circle(50.0f, Color.RED);
+        circle_Red.setCursor(Cursor.HAND);
+        circle_Red.setOnMousePressed(circleOnMousePressedEventHandler);
+        circle_Red.setOnMouseDragged(circleOnMouseDraggedEventHandler);
 
-
-
-
-
-
-
+        mapGroup = new Group();
+        mapGroup.getChildren().addAll(circle_Red);
+        System.out.println("CIRCLE MANIA!");
 
 
     }
@@ -95,21 +101,7 @@ public class Controller {
 
 
 
-    Circle circle_Red;
-    double orgSceneX, orgSceneY;
-    double orgTranslateX, orgTranslateY;
 
-    @FXML
-    protected void initialize() {
-        circle_Red = new Circle(50.0f, Color.RED);
-        circle_Red.setCursor(Cursor.HAND);
-        circle_Red.setOnMousePressed(circleOnMousePressedEventHandler);
-        circle_Red.setOnMouseDragged(circleOnMouseDraggedEventHandler);
-
-        mapGroup = new Group();
-        mapGroup.getChildren().addAll(circle_Red);
-        System.out.println("CIRCLE MANIA!");
-    }
 
     EventHandler<MouseEvent> circleOnMousePressedEventHandler =
             new EventHandler<MouseEvent>() {
