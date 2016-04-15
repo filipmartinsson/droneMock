@@ -3,18 +3,16 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-
-import javafx.fxml.FXML;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.Group;
-
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 
 public class Controller {
@@ -57,6 +55,16 @@ public class Controller {
         posTableView.setItems(listItems);
         posTableView.getColumns().addAll(col1, col2, col3, col4);
 
+
+
+
+
+
+
+
+
+
+
     }
 
 
@@ -77,6 +85,58 @@ public class Controller {
         System.out.println("Deleting position");
     }
 
+
+
+
+
+    //-----------------------------------------------
+
+
+
+
+
+    Circle circle_Red;
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
+
+    @FXML
+    protected void initialize() {
+        circle_Red = new Circle(50.0f, Color.RED);
+        circle_Red.setCursor(Cursor.HAND);
+        circle_Red.setOnMousePressed(circleOnMousePressedEventHandler);
+        circle_Red.setOnMouseDragged(circleOnMouseDraggedEventHandler);
+
+        mapGroup = new Group();
+        mapGroup.getChildren().addAll(circle_Red);
+        System.out.println("CIRCLE MANIA!");
+    }
+
+    EventHandler<MouseEvent> circleOnMousePressedEventHandler =
+            new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent t) {
+                    orgSceneX = t.getSceneX();
+                    orgSceneY = t.getSceneY();
+                    orgTranslateX = ((Circle)(t.getSource())).getTranslateX();
+                    orgTranslateY = ((Circle)(t.getSource())).getTranslateY();
+                }
+            };
+
+    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler =
+            new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent t) {
+                    double offsetX = t.getSceneX() - orgSceneX;
+                    double offsetY = t.getSceneY() - orgSceneY;
+                    double newTranslateX = orgTranslateX + offsetX;
+                    double newTranslateY = orgTranslateY + offsetY;
+
+                    ((Circle)(t.getSource())).setTranslateX(newTranslateX);
+                    ((Circle)(t.getSource())).setTranslateY(newTranslateY);
+                }
+            };
 
 
 
