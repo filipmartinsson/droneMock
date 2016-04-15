@@ -20,31 +20,13 @@ import java.util.HashMap;
 
 public class Main extends Application {
 
-    @FXML
-    private TableView posTableView;
 
-    private TableColumn col1 = new TableColumn("Order");
-    private TableColumn col2 = new TableColumn("X-pos");
-    private TableColumn col3 = new TableColumn("Y-pos");
-    private TableColumn col4 = new TableColumn("Z-pos");
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
         primaryStage.setTitle("Hello World!");
-
-
-        col1.setCellValueFactory(
-                new PropertyValueFactory<Position, Integer>("id"));
-        col2.setCellValueFactory(
-                new PropertyValueFactory<Position, Integer>("x"));
-        col3.setCellValueFactory(
-                new PropertyValueFactory<Position, Integer>("y"));
-        col4.setCellValueFactory(
-                new PropertyValueFactory<Position, Integer>("z"));
-        root.
-        posTableView.getColumns().addAll(col1, col2, col3, col4);
-
         primaryStage.setScene(new Scene(root, 940, 545));
         primaryStage.show();
 
