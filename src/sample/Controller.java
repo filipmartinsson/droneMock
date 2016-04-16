@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -14,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+
 
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -37,20 +40,22 @@ public class Controller {
     @FXML
     private TextField zPos;
     @FXML
+    private Slider zSlider;
+    @FXML
     private Group mapGroup;
     @FXML
     private Button deleteButton;
     @FXML
     private Button addButton;
 
-
-    private ArrayList<Position> positionList = new ArrayList<>();
     ObservableList<Position> listItems = FXCollections.observableArrayList ();
 
     @FXML
     public void initialize() {
         deleteButton.setDisable(true);
-        addButton.setDisable(true);
+        xPos.setText("0");
+        yPos.setText("0");
+        zPos.setText("0");
 
         TableColumn col1 = new TableColumn("Order");
         TableColumn col2 = new TableColumn("X-pos");
@@ -77,28 +82,31 @@ public class Controller {
             }
 
         });
-        xPos.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+        xPos.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void handle(KeyEvent event) {
-                System.out.println("hhhh");
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0)
                     addButton.setDisable(false);
                 else
                     addButton.setDisable(true);
             }
         });
-        yPos.setOnKeyReleased(new EventHandler<KeyEvent>() {
+        yPos.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void handle(KeyEvent event) {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0)
                     addButton.setDisable(false);
                 else
                     addButton.setDisable(true);
             }
         });
-        zPos.setOnKeyReleased(new EventHandler<KeyEvent>() {
+        zPos.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void handle(KeyEvent event) {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(!((int)Math.floor(zSlider.getValue()) == Integer.parseInt(newValue))){
+                    zSlider.setValue(Double.valueOf(newValue));
+                }
                 if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0)
                     addButton.setDisable(false);
                 else
@@ -116,6 +124,18 @@ public class Controller {
         mapGroup.getChildren().addAll(circle_Red);
         System.out.println("CIRCLE MANIA!");
 
+        zSlider.setMin(0);
+        zSlider.setMax(5000);
+        zSlider.setValue(0);
+        zSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                zPos.setText(String.valueOf(Integer.valueOf(newValue.intValue())));
+
+            }
+        });
+
+
 
     }
 
@@ -125,12 +145,8 @@ public class Controller {
         System.out.println("Adding position");
         try{
             Position p = new Position(Integer.parseInt(xPos.getText()), Integer.parseInt(yPos.getText()), Integer.parseInt(zPos.getText()), listItems.size());
-            //positionList.add(p);
             listItems.add(p);
-            xPos.setText("");
-            yPos.setText("");
-            zPos.setText("");
-            addButton.setDisable(true);
+            zPos.setText(String.valueOf((int)Math.floor(zSlider.getValue())));
         }catch (Exception e){
             //not a string
         }
