@@ -9,6 +9,10 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.geometry.Point2D;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +24,10 @@ import javafx.scene.text.Text;
 
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -30,6 +38,8 @@ public class Controller {
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
 
+    @FXML
+    private AnchorPane mapPane;
 
     @FXML
     private TableView posTableView;
@@ -41,8 +51,6 @@ public class Controller {
     private TextField zPos;
     @FXML
     private Slider zSlider;
-    @FXML
-    private Group mapGroup;
     @FXML
     private Button deleteButton;
     @FXML
@@ -115,15 +123,6 @@ public class Controller {
         });
 
 
-        circle_Red = new Circle(50.0f, Color.RED);
-        circle_Red.setCursor(Cursor.HAND);
-        circle_Red.setOnMousePressed(circleOnMousePressedEventHandler);
-        circle_Red.setOnMouseDragged(circleOnMouseDraggedEventHandler);
-
-        mapGroup = new Group();
-        mapGroup.getChildren().addAll(circle_Red);
-        System.out.println("CIRCLE MANIA!");
-
         zSlider.setMin(0);
         zSlider.setMax(5000);
         zSlider.setValue(0);
@@ -136,7 +135,6 @@ public class Controller {
         });
 
 
-
     }
 
 
@@ -147,6 +145,10 @@ public class Controller {
             Position p = new Position(Integer.parseInt(xPos.getText()), Integer.parseInt(yPos.getText()), Integer.parseInt(zPos.getText()), listItems.size());
             listItems.add(p);
             zPos.setText(String.valueOf((int)Math.floor(zSlider.getValue())));
+            p.getCircle().setOnMousePressed(p.circleOnMousePressedEventHandler);
+            p.getCircle().setOnMouseDragged(p.circleOnMouseDraggedEventHandler);
+            mapPane.getChildren().add(p.getCircle());
+
         }catch (Exception e){
             //not a string
         }
@@ -176,51 +178,6 @@ public class Controller {
 
 
     }
-
-
-
-
-
-    //-----------------------------------------------
-
-
-
-
-
-
-
-    EventHandler<MouseEvent> circleOnMousePressedEventHandler =
-            new EventHandler<MouseEvent>() {
-
-                @Override
-                public void handle(MouseEvent t) {
-                    orgSceneX = t.getSceneX();
-                    orgSceneY = t.getSceneY();
-                    orgTranslateX = ((Circle)(t.getSource())).getTranslateX();
-                    orgTranslateY = ((Circle)(t.getSource())).getTranslateY();
-                }
-            };
-
-    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler =
-            new EventHandler<MouseEvent>() {
-
-                @Override
-                public void handle(MouseEvent t) {
-                    double offsetX = t.getSceneX() - orgSceneX;
-                    double offsetY = t.getSceneY() - orgSceneY;
-                    double newTranslateX = orgTranslateX + offsetX;
-                    double newTranslateY = orgTranslateY + offsetY;
-
-                    ((Circle)(t.getSource())).setTranslateX(newTranslateX);
-                    ((Circle)(t.getSource())).setTranslateY(newTranslateY);
-                }
-            };
-
-
-
-
-
-
 
 
 }
