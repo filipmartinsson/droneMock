@@ -34,6 +34,17 @@ import java.util.ArrayList;
 public class Controller {
 
 
+    /* TODO
+
+     1. index numbers on balls
+     2. be able to change coordinates manually
+     3. fix coordinates (0.0 at the upper right corner)
+
+      */
+
+
+
+
     Circle circle_Red;
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
