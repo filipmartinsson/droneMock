@@ -36,9 +36,10 @@ public class Controller {
 
     /* TODO
 
-     1. index numbers on balls
+     1. DONE index numbers on balls
      2. be able to change coordinates manually
-     3. fix coordinates (0.0 at the upper right corner)
+     3. DONE fix correct coordinates
+     4. print a txt with all coordinates
 
       */
 
@@ -102,10 +103,11 @@ public class Controller {
 
         });
 
+
         xPos.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0)
+                if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0) // add limits
                     addButton.setDisable(false);
                 else
                     addButton.setDisable(true);
@@ -114,7 +116,7 @@ public class Controller {
         yPos.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0)
+                if(xPos.getText().length()>0 && yPos.getText().length()>0 && zPos.getText().length()>0) //add limits
                     addButton.setDisable(false);
                 else
                     addButton.setDisable(true);
@@ -132,6 +134,11 @@ public class Controller {
                     addButton.setDisable(true);
             }
         });
+
+
+
+
+
 
 
         zSlider.setMin(0);
@@ -156,9 +163,9 @@ public class Controller {
             Position p = new Position(Integer.parseInt(xPos.getText()), Integer.parseInt(yPos.getText()), Integer.parseInt(zPos.getText()), listItems.size());
             listItems.add(p);
             zPos.setText(String.valueOf((int)Math.floor(zSlider.getValue())));
-            p.getCircle().setOnMousePressed(p.circleOnMousePressedEventHandler);
-            p.getCircle().setOnMouseDragged(p.circleOnMouseDraggedEventHandler);
-            mapPane.getChildren().add(p.getCircle());
+            p.getStackPane().setOnMousePressed(p.circleOnMousePressedEventHandler);
+            p.getStackPane().setOnMouseDragged(p.circleOnMouseDraggedEventHandler);
+            mapPane.getChildren().addAll(p.getStackPane());
 
         }catch (Exception e){
             //not a string
@@ -188,6 +195,19 @@ public class Controller {
 
 
 
+    }
+
+
+    public static void addTextLimiter(final TextField tf, final int maxLength) {
+        tf.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (Integer.getInteger(tf.getText()) > maxLength) {
+                    String s = String.valueOf(maxLength);
+                    tf.setText(s);
+                }
+            }
+        });
     }
 
 

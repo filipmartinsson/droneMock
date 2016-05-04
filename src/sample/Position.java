@@ -7,8 +7,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextBoundsType;
+
 import java.util.Random;
 
 
@@ -22,8 +26,11 @@ public class Position {
     private final IntegerProperty z;
     private final IntegerProperty id;
     private final Circle circle;
+    private final Text text;
+    private final StackPane stackPane = new StackPane();
     private double orgSceneX, orgSceneY;
     private double orgTranslateX, orgTranslateY;
+
 
 
 
@@ -33,8 +40,16 @@ public class Position {
         this.z = new SimpleIntegerProperty(z);
         this.id = new SimpleIntegerProperty(id);
         this.circle = new Circle(10.0f, colorRandom());
-        circle.setLayoutX(x);
-        circle.setLayoutY(y);
+        this.text = new Text(String.valueOf(id));
+        text.setBoundsType(TextBoundsType.VISUAL);
+
+        circle.setLayoutX(x+10);
+        circle.setLayoutY(y+10);
+        System.out.println(circle.getLayoutX());
+
+        stackPane.getChildren().addAll(circle,text);
+
+
 
     }
 
@@ -46,9 +61,17 @@ public class Position {
         return Color.rgb(red,green,blue);
     }
 
+    public StackPane getStackPane(){
+        return stackPane;
+    }
+
 
     public int getX() {
         return x.get();
+    }
+
+    public Text getText(){
+        return text;
     }
 
     public IntegerProperty xProperty() {
@@ -103,8 +126,8 @@ public class Position {
                     orgSceneX = t.getSceneX();
                     System.out.println(orgSceneX);
                     orgSceneY = t.getSceneY();
-                    orgTranslateX = ((Circle)(t.getSource())).getTranslateX();
-                    orgTranslateY = ((Circle)(t.getSource())).getTranslateY();
+                    orgTranslateX = ((StackPane)(t.getSource())).getTranslateX();
+                    orgTranslateY = ((StackPane)(t.getSource())).getTranslateY();
                 }
             };
 
@@ -118,11 +141,12 @@ public class Position {
                     double newTranslateX = orgTranslateX + offsetX;
                     double newTranslateY = orgTranslateY + offsetY;
 
-                    if(newTranslateX < 400 && newTranslateX > 10 && newTranslateY < 300 && newTranslateY > 10){
-                        ((Circle)(t.getSource())).setTranslateX(newTranslateX);
-                        ((Circle)(t.getSource())).setTranslateY(newTranslateY);
-                        x.setValue(newTranslateX);
-                        y.setValue(newTranslateX);
+                    if(t.getSceneX() < 498 && t.getSceneX() > 76 && t.getSceneY() < 499 && t.getSceneY() > 76){
+                        ((StackPane)(t.getSource())).setTranslateX(newTranslateX);
+                        ((StackPane)(t.getSource())).setTranslateY(newTranslateY);
+                        x.setValue(t.getSceneX()-76);
+                        y.setValue(t.getSceneY()-76);
+                        System.out.println("NEW: " + t.getSceneX()+ "   " + t.getSceneY());
                     }
 
 
