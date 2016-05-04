@@ -32,8 +32,9 @@ public class Position {
         this.y = new SimpleIntegerProperty(y);
         this.z = new SimpleIntegerProperty(z);
         this.id = new SimpleIntegerProperty(id);
-
-        this.circle = new Circle(5.0f, colorRandom());
+        this.circle = new Circle(10.0f, colorRandom());
+        circle.setLayoutX(x);
+        circle.setLayoutY(y);
 
     }
 

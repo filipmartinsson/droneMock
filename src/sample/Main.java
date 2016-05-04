@@ -26,10 +26,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(new Scene(root, 940, 545));
-        primaryStage.show();
 
+        primaryStage.setTitle("Hello World!");
+        Scene scene = new Scene(root, 940, 545);
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
     }
 
