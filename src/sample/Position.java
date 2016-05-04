@@ -45,9 +45,13 @@ public class Position {
 
         circle.setLayoutX(x+10);
         circle.setLayoutY(y+10);
-        System.out.println(circle.getLayoutX());
+//        System.out.println(circle.getLayoutX());
+
+        stackPane.setLayoutX(x);
+        stackPane.setLayoutY(y);
 
         stackPane.getChildren().addAll(circle,text);
+
 
 
 
@@ -141,7 +145,7 @@ public class Position {
                     double newTranslateX = orgTranslateX + offsetX;
                     double newTranslateY = orgTranslateY + offsetY;
 
-                    if(t.getSceneX() < 498 && t.getSceneX() > 76 && t.getSceneY() < 499 && t.getSceneY() > 76){
+                    if(t.getSceneX() < 497 && t.getSceneX() > 76 && t.getSceneY() < 498 && t.getSceneY() > 76){
                         ((StackPane)(t.getSource())).setTranslateX(newTranslateX);
                         ((StackPane)(t.getSource())).setTranslateY(newTranslateY);
                         x.setValue(t.getSceneX()-76);

@@ -15,20 +15,20 @@
             <Group id="mapGroup" />
          </children></AnchorPane>
       <Slider fx:id="zSlider" layoutX="520.0" layoutY="64.0" orientation="VERTICAL" prefHeight="447.0" prefWidth="16.0" />
-      <TableView fx:id="posTableView" layoutX="647.0" layoutY="64.0" prefHeight="221.0" prefWidth="221.0" />
-      <Button fx:id="deleteButton" layoutX="838.0" layoutY="291.0" mnemonicParsing="false" onAction="#deletePosition" prefHeight="27.0" prefWidth="30.0" text="-" />
-      <Button fx:id="addButton" layoutX="797.0" layoutY="291.0" mnemonicParsing="false" onAction="#addPosition" prefHeight="27.0" prefWidth="26.0" text="+" />
-      <Button layoutX="650.0" layoutY="474.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="101.0" text="Generate" />
-      <Text layoutX="647.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Script" wrappingWidth="48.0" />
-      <Text layoutX="647.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Position" wrappingWidth="89.0" />
-      <TextField layoutX="726.0" layoutY="333.0" prefHeight="27.0" prefWidth="145.0" fx:id="xPos" />
-      <TextField fx:id="yPos" layoutX="726.0" layoutY="367.0" prefHeight="27.0" prefWidth="145.0" />
-      <TextField fx:id="zPos" layoutX="726.0" layoutY="403.0" prefHeight="27.0" prefWidth="145.0" />
-      <Text layoutX="645.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X-Positon" wrappingWidth="68.0" />
-      <Text layoutX="645.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y-Positon" wrappingWidth="68.0" />
-      <Text layoutX="645.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z-Positon" wrappingWidth="68.0" />
+      <TableView fx:id="posTableView" layoutX="593.0" layoutY="64.0" prefHeight="221.0" prefWidth="314.0" />
+      <Button fx:id="deleteButton" layoutX="877.0" layoutY="295.0" mnemonicParsing="false" onAction="#deletePosition" prefHeight="27.0" prefWidth="30.0" text="-" />
+      <Button fx:id="addButton" layoutX="836.0" layoutY="295.0" mnemonicParsing="false" onAction="#addPosition" prefHeight="27.0" prefWidth="26.0" text="+" />
+      <Button fx:id="generateButton" layoutX="593.0" layoutY="474.0" mnemonicParsing="false" onAction="#generateCoordinates" prefHeight="27.0" prefWidth="154.0" text="Generate" />
+      <Text layoutX="593.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Script" wrappingWidth="48.0" />
+      <Text layoutX="593.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Position" wrappingWidth="89.0" />
+      <TextField layoutX="674.0" layoutY="334.0" prefHeight="27.0" prefWidth="233.0" fx:id="xPos" />
+      <TextField fx:id="yPos" layoutX="674.0" layoutY="368.0" prefHeight="27.0" prefWidth="233.0" />
+      <TextField fx:id="zPos" layoutX="674.0" layoutY="404.0" prefHeight="27.0" prefWidth="233.0" />
+      <Text layoutX="593.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X-Positon" wrappingWidth="68.0" />
+      <Text layoutX="593.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y-Positon" wrappingWidth="68.0" />
+      <Text layoutX="593.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z-Positon" wrappingWidth="68.0" />
       <Text layoutX="63.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Map" />
-      <Button layoutX="770.0" layoutY="474.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="101.0" text="Transfer" />
+      <Button fx:id="transferButton" layoutX="753.0" layoutY="474.0" mnemonicParsing="false" onAction="#transferCoordinates" prefHeight="27.0" prefWidth="154.0" text="Transfer" />
       <Group />
    </children>
 </AnchorPane>
