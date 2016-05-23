@@ -65,6 +65,11 @@ public class Position {
         return Color.rgb(red,green,blue);
     }
 
+    public void HideCircle(){
+        stackPane.getChildren().remove(circle);
+        stackPane.getChildren().remove(text);
+    }
+
     public StackPane getStackPane(){
         return stackPane;
     }

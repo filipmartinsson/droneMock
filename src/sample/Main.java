@@ -27,7 +27,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Sophisticated Drone Automation Tool");
         Scene scene = new Scene(root, 940, 545);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(scene);

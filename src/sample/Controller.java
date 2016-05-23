@@ -235,6 +235,7 @@ public class Controller {
                 indexToRemove = ((Position) p).getId();
 
             }
+            listItems.get(indexToRemove).HideCircle();
             listItems.remove(indexToRemove);
 
             for (Position p : listItems) {
